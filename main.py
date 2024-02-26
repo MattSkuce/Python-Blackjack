@@ -14,14 +14,14 @@ player_score = 0
 cpu_score = 0
 game_over = False
 
-
+# removing cards from deck
 def draw_card():
     if deck:
         return deck.pop()
     else:
         print("The deck is empty. Cannot draw a card.")
 
-
+# updating score of drawn card
 def calc_score(card, current_score):
     rank = card['rank']
 
@@ -33,7 +33,7 @@ def calc_score(card, current_score):
     else:
         return current_score + int(rank)
 
-
+# Player draws a card
 def player_draw_a_card():
     global player_score
     card = draw_card()
@@ -42,7 +42,7 @@ def player_draw_a_card():
     if player_score > 21:
         print("You Busted!")
 
-
+# CPU draws a card
 def cpu_draw_a_card(hidden=False):
     global cpu_score
     card = draw_card()
@@ -56,7 +56,7 @@ def cpu_draw_a_card(hidden=False):
     if cpu_score > 21:
         print("CPU Busted!")
 
-
+# Starting card draws
 print("Welcome to Blackjack Simulator.")
 player_draw_a_card()
 player_draw_a_card()
@@ -64,6 +64,7 @@ player_draw_a_card()
 cpu_draw_a_card()
 cpu_draw_a_card(hidden=True)
 
+# Player blackjack loop
 while not game_over:
     pl_input = input("Do you want to 'Hit' or 'Stand'?: ")
 
@@ -74,12 +75,14 @@ while not game_over:
     else:
         game_over = True
 
+# CPU blackjack loop
 while True:
     if cpu_score < 17 and player_score < 21:
         cpu_draw_a_card()
     else:
         break
 
+# Final Scores and determining winner
 print(f"Final scores:\n"
       f"Player: {player_score}\n"
       f"CPU: {cpu_score}")
